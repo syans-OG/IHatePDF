@@ -35,10 +35,7 @@ export function App() {
           <div className="space-y-16 animate-fade-in">
             {/* Hero Section (AIDA Structure) */}
             <div className="text-center space-y-6 pt-8 pb-4 max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-bg-surface border border-border-strong text-text-secondary text-[11px] font-medium tracking-wide uppercase">
-                <Flame className="w-3.5 h-3.5 text-text-primary" />
-                <span>Professional PDF Suite + 1 Special Feature</span>
-              </div>
+
 
               <h1 className="text-4xl sm:text-6xl font-semibold tracking-tighter text-text-primary leading-[1.1]">
                 Master your PDFs.<br />
