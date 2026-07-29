@@ -1,32 +1,42 @@
-# React + TypeScript + Vite
+# iHatePDF
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, client-side PDF utility toolkit designed for maximum privacy, speed, and elegance. Unlike traditional PDF editors that upload your sensitive documents to remote servers, iHatePDF processes everything directly within your browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **100% Client-Side Processing**: No uploads, no servers, zero data collection.
+- **Conversion Tools**: Word to PDF, PDF to Word, JPG to PDF, PDF to JPG, PPT to PDF, and PDF to PPT.
+- **Editing Tools**: Merge multiple PDFs, split documents, and compress files.
+- **Size Maximizer**: A specialized payload injection tool capable of artificially inflating PDF file sizes up to 1 GB to satisfy arbitrary file size minimums or constraints.
+- **Modern UI/UX**: Built with a sleek, gapless Bento grid, responsive design, and an elegant dark/light theme toggle.
 
-## React Compiler
+## Architecture & Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19 + TypeScript
+- **Styling**: Tailwind CSS v4 (gapless Bento grid, custom design system)
+- **PDF Processing**: Powered by modern client-side libraries (e.g., pdf-lib)
+- **Build Tool**: Vite
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Design Philosophy
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The user interface was crafted with a "Premium Monochromatic" aesthetic, featuring clean typography, subtle interactive borders, and smooth theme transitions. The goal was to provide an enterprise-grade experience for everyday utility tasks.
+
+## Author
+
+Made by Syans.
