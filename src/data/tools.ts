@@ -1,0 +1,132 @@
+export interface ToolDef {
+  id: string;
+  name: string;
+  nameIndo: string;
+  description: string;
+  iconName: string;
+  category: 'convert' | 'edit' | 'troll';
+  accept: string;
+  badge?: string;
+  badgeType?: 'troll' | 'popular' | 'new';
+  gradient: string;
+  multiple: boolean;
+}
+
+export const TOOLS: ToolDef[] = [
+  {
+    id: 'word-to-pdf',
+    name: 'Word to PDF',
+    nameIndo: 'Word ke PDF',
+    description: 'Convert Microsoft Word (DOCX) files to clean, formatted PDF documents.',
+    iconName: 'FileText',
+    category: 'convert',
+    accept: '.docx',
+    gradient: 'from-blue-600 to-cyan-500',
+    multiple: false,
+  },
+  {
+    id: 'pdf-to-word',
+    name: 'PDF to Word',
+    nameIndo: 'PDF ke Word',
+    description: 'Extract PDF page text and layout into editable Microsoft Word (.docx) files.',
+    iconName: 'FileType2',
+    category: 'convert',
+    accept: '.pdf',
+    badge: 'Popular',
+    badgeType: 'popular',
+    gradient: 'from-cyan-500 to-blue-600',
+    multiple: false,
+  },
+  {
+    id: 'jpg-to-pdf',
+    name: 'JPG to PDF',
+    nameIndo: 'JPG ke PDF',
+    description: 'Convert JPG, PNG, and images into a single professional PDF document.',
+    iconName: 'Image',
+    category: 'convert',
+    accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png',
+    gradient: 'from-purple-600 to-indigo-600',
+    multiple: true,
+  },
+  {
+    id: 'pdf-to-jpg',
+    name: 'PDF to JPG',
+    nameIndo: 'PDF ke JPG',
+    description: 'Extract every page of your PDF into high-resolution JPG image files.',
+    iconName: 'FileImage',
+    category: 'convert',
+    accept: '.pdf',
+    gradient: 'from-indigo-600 to-purple-600',
+    multiple: false,
+  },
+  {
+    id: 'merge-pdf',
+    name: 'Merge PDF',
+    nameIndo: 'Gabungkan PDF',
+    description: 'Combine multiple PDF files into one unified document seamlessly.',
+    iconName: 'Merge',
+    category: 'edit',
+    accept: '.pdf',
+    badge: 'Essential',
+    badgeType: 'popular',
+    gradient: 'from-rose-600 to-orange-500',
+    multiple: true,
+  },
+  {
+    id: 'split-pdf',
+    name: 'Split PDF',
+    nameIndo: 'Pisah PDF',
+    description: 'Separate single PDF pages or extract custom page ranges (e.g. 1-3, 5).',
+    iconName: 'Split',
+    category: 'edit',
+    accept: '.pdf',
+    gradient: 'from-amber-500 to-rose-600',
+    multiple: false,
+  },
+  {
+    id: 'ppt-to-pdf',
+    name: 'PPT to PDF',
+    nameIndo: 'PPT ke PDF',
+    description: 'Convert PowerPoint (PPTX) presentations into PDF slides.',
+    iconName: 'Presentation',
+    category: 'convert',
+    accept: '.pptx',
+    gradient: 'from-orange-500 to-amber-600',
+    multiple: false,
+  },
+  {
+    id: 'pdf-to-ppt',
+    name: 'PDF to PPT',
+    nameIndo: 'PDF ke PPT',
+    description: 'Convert PDF pages into PowerPoint (.pptx) presentation slides.',
+    iconName: 'Tv2',
+    category: 'convert',
+    accept: '.pdf',
+    gradient: 'from-amber-600 to-orange-500',
+    multiple: false,
+  },
+  {
+    id: 'compress-pdf',
+    name: 'Compress PDF',
+    nameIndo: 'Kompres PDF',
+    description: 'Reduce PDF file size while keeping visual readability crisp.',
+    iconName: 'Minimize2',
+    category: 'edit',
+    accept: '.pdf',
+    gradient: 'from-emerald-600 to-teal-500',
+    multiple: false,
+  },
+  {
+    id: 'inflate',
+    name: 'File Size Maximizer',
+    nameIndo: 'Maksimalkan Ukuran PDF',
+    description: 'Advanced payload injection to increase file sizes up to 1 GB. Perfect for meeting arbitrary minimum size requirements.',
+    iconName: 'Bomb',
+    category: 'troll',
+    accept: '.pdf',
+    badge: 'SPECIAL FEATURE',
+    badgeType: 'troll',
+    gradient: 'from-emerald-400 via-teal-500 to-purple-600',
+    multiple: false,
+  },
+];

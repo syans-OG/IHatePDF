@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-main: var(--bg-main);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-bg-surface: var(--bg-surface);
+  --color-border-main: var(--border-main);
+  --color-border-strong: var(--border-strong);
+  --color-border-hover: var(--border-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-bright: var(--text-bright);
+  --color-accent-red: var(--accent-red);
+  --color-accent-troll: var(--accent-troll);
+  --color-accent-troll-hover: var(--accent-troll-hover);
+}
+
+@layer base {
+  :root {
+    --bg-main: #050505;
+    --bg-card: #0a0a0a;
+    --bg-card-hover: #0f0f0f;
+    --bg-surface: #111111;
+    --border-main: #1a1a1a;
+    --border-strong: #222222;
+    --border-hover: #333333;
+    --text-primary: #ededed;
+    --text-secondary: #888888;
+    --text-muted: #666666;
+    --text-bright: #ffffff;
+    --accent-red: #e63946;
+    --accent-troll: #00e5ff;
+    --accent-troll-hover: #33eaff;
+  }
+  
+  .light {
+    --bg-main: #ffffff;
+    --bg-card: #f9f9f9;
+    --bg-card-hover: #f1f1f1;
+    --bg-surface: #f3f4f6;
+    --border-main: #e5e7eb;
+    --border-strong: #d1d5db;
+    --border-hover: #9ca3af;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #6b7280;
+    --text-bright: #000000;
+    --accent-red: #dc2626;
+    --accent-troll: #0ea5e9;
+    --accent-troll-hover: #0284c7;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth Theme Transitions */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* Impeccable Card Styling */
+.impeccable-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
+  transition: all 0.2s ease-out;
+}
+
+.impeccable-card-hover:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+/* Gapless Bento Grid Container */
+.bento-grid {
+  display: grid;
+  gap: 1px;
+  background-color: var(--border-main);
+  border: 1px solid var(--border-main);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.bento-item {
+  background: var(--bg-card);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bento-item:hover {
+  background: var(--bg-card-hover);
+}
+
+/* Subtle glowing lines */
+.troll-accent {
+  box-shadow: inset 0 1px 0 0 color-mix(in srgb, var(--accent-troll) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-troll) 20%, transparent) !important;
+}
+
+.troll-accent:hover {
+  border-color: color-mix(in srgb, var(--accent-troll) 40%, transparent) !important;
+  background: color-mix(in srgb, var(--accent-troll) 2%, transparent);
+}
+
+.hate-accent {
+  box-shadow: inset 0 1px 0 0 color-mix(in srgb, var(--accent-red) 10%, transparent);
+}
+
+/* Typography refinements */
+.heading-tighter {
+  letter-spacing: -0.04em;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(180deg, var(--text-bright) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
