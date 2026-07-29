@@ -33,8 +33,9 @@ export const Header: React.FC<HeaderProps> = ({ activeTool, onSelectTool }) => {
         <button
           type="button"
           onClick={() => onSelectTool(null)}
-          className="flex items-center transition-all cursor-pointer"
+          className="flex items-center gap-2.5 transition-all cursor-pointer"
         >
+          <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
           <span className="text-xl font-bold tracking-tighter text-text-primary font-sans">
             iHate<span className="text-accent-red">PDF</span>
           </span>

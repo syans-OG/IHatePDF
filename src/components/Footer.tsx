@@ -6,7 +6,8 @@ export const Footer: React.FC = () => {
     <footer className="mt-24 border-t border-border-main bg-transparent text-text-muted py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
         <div>
-          <div className="flex items-center justify-center md:justify-start gap-2 font-bold text-text-primary text-lg tracking-tighter">
+          <div className="flex items-center justify-center md:justify-start gap-2.5 font-bold text-text-primary text-lg tracking-tighter">
+            <img src="/logo.png" alt="Logo" className="w-5 h-5 object-contain" />
             <span>iHate<span className="text-accent-red">PDF</span></span>
             <span className="text-[10px] px-2 py-0.5 rounded-sm bg-bg-surface text-text-secondary border border-border-strong font-medium tracking-wide uppercase">
               Client-Side
