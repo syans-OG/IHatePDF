@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flame, Bomb, Sun, Moon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
   activeTool: string | null;
