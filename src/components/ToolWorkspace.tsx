@@ -23,6 +23,8 @@ import {
   pptToPdf,
   pdfToPpt,
   compressPdf,
+  pdfToMd,
+  mdToPdf,
 } from '../services/pdfServices';
 
 interface ToolWorkspaceProps {
@@ -172,6 +174,31 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({ tool, onBack }) =>
           setSingleOutput({
             blob,
             filename: `${baseName}_presentation.pptx`,
+          });
+          break;
+        }
+
+        case 'pdf-to-md': {
+          const bytes = await pdfToMd(firstFile, (prog, msg) => {
+            setProgress(prog);
+            setStatusMsg(msg);
+          });
+          const blob = new Blob([bytes as unknown as BlobPart], { type: 'text/markdown' });
+          setSingleOutput({
+            blob,
+            filename: `${baseName}.md`,
+          });
+          break;
+        }
+
+        case 'md-to-pdf': {
+          const bytes = await mdToPdf(firstFile, (prog, msg) => {
+            setProgress(prog);
+            setStatusMsg(msg);
+          });
+          setSingleOutput({
+            bytes,
+            filename: `${baseName}.pdf`,
           });
           break;
         }

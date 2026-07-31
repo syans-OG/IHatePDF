@@ -656,3 +656,129 @@ async function extractTextFromPptx(file: File): Promise<string> {
     return 'PowerPoint file content extracted from ' + file.name;
   }
 }
+
+/**
+ * 10. PDF to Markdown (PDF ke MD)
+ */
+export async function pdfToMd(
+  file: File,
+  onProgress?: (progress: number, msg: string) => void
+): Promise<Uint8Array> {
+  onProgress?.(10, 'Loading PDF document...');
+  const arrayBuffer = await file.arrayBuffer();
+  
+  const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+  const pdf = await loadingTask.promise;
+  const numPages = pdf.numPages;
+  
+  let markdownContent = `# Extracted Content from ${file.name}\n\n`;
+
+  for (let i = 1; i <= numPages; i++) {
+    onProgress?.(10 + Math.floor((i / numPages) * 80), `Extracting text from page ${i}...`);
+    const page = await pdf.getPage(i);
+    const textContent = await page.getTextContent();
+    
+    const pageText = textContent.items
+      .map((item: any) => item.str)
+      .join(' ');
+      
+    markdownContent += `## Page ${i}\n\n`;
+    markdownContent += pageText + '\n\n---\n\n';
+  }
+  
+  onProgress?.(100, 'Markdown conversion complete!');
+  const encoder = new TextEncoder();
+  return encoder.encode(markdownContent);
+}
+
+/**
+ * 11. Markdown to PDF (MD ke PDF)
+ */
+export async function mdToPdf(
+  file: File,
+  onProgress?: (progress: number, msg: string) => void
+): Promise<Uint8Array> {
+  onProgress?.(10, 'Reading Markdown file...');
+  const text = await file.text();
+  
+  const pdfDoc = await PDFDocument.create();
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  
+  let page = pdfDoc.addPage();
+  const { width, height } = page.getSize();
+  
+  const fontSize = 12;
+  const margin = 50;
+  let y = height - margin;
+  
+  const lines = text.split('\n');
+  
+  onProgress?.(40, 'Generating PDF pages...');
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) {
+      y -= 12; // Empty line space
+      if (y < margin) {
+        page = pdfDoc.addPage();
+        y = height - margin;
+      }
+      continue;
+    }
+    
+    let currentFont = font;
+    let currentSize = fontSize;
+    let cleanLine = line;
+
+    if (line.startsWith('# ')) {
+      currentFont = boldFont;
+      currentSize = 24;
+      cleanLine = line.replace('# ', '');
+      y -= 10;
+    } else if (line.startsWith('## ')) {
+      currentFont = boldFont;
+      currentSize = 20;
+      cleanLine = line.replace('## ', '');
+      y -= 8;
+    } else if (line.startsWith('### ')) {
+      currentFont = boldFont;
+      currentSize = 16;
+      cleanLine = line.replace('### ', '');
+      y -= 6;
+    }
+
+    if (y < margin + currentSize) {
+      page = pdfDoc.addPage();
+      y = height - margin;
+    }
+
+    const words = cleanLine.split(' ');
+    let currentText = '';
+    
+    for (const word of words) {
+      const testLine = currentText ? currentText + ' ' + word : word;
+      const textWidth = currentFont.widthOfTextAtSize(testLine, currentSize);
+      
+      if (textWidth > width - 2 * margin) {
+        page.drawText(currentText, { x: margin, y, size: currentSize, font: currentFont });
+        y -= (currentSize + 6);
+        currentText = word;
+        if (y < margin) {
+          page = pdfDoc.addPage();
+          y = height - margin;
+        }
+      } else {
+        currentText = testLine;
+      }
+    }
+    if (currentText) {
+      page.drawText(currentText, { x: margin, y, size: currentSize, font: currentFont });
+      y -= (currentSize + 6);
+    }
+  }
+  
+  onProgress?.(90, 'Finalizing PDF...');
+  const pdfBytes = await pdfDoc.save();
+  onProgress?.(100, 'Complete!');
+  return pdfBytes;
+}
