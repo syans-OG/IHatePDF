@@ -1,6 +1,7 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Use CDN worker for reliable cross-browser execution without Vite worker bundling issues
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version || '4.0.379'}/pdf.worker.min.mjs`;
+// Use local bundled worker to guarantee version match and avoid CDN issues
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
 
 export { pdfjsLib };

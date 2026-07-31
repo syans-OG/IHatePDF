@@ -301,6 +301,12 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({ tool, onBack }) =>
         </p>
       </div>
 
+      {statusMsg && statusMsg.toLowerCase().includes('error') && !isProcessing && (
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium animate-fade-in text-center max-w-2xl mx-auto">
+          {statusMsg}
+        </div>
+      )}
+
       <div className="impeccable-card p-6 sm:p-10 rounded-3xl space-y-8">
         {!hasOutput && (
           <div className="space-y-6">

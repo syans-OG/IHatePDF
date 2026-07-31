@@ -10,6 +10,19 @@ export interface ProcessingProgress {
 }
 
 /**
+ * Sanitize text to ensure it can be encoded by pdf-lib's WinAnsi StandardFonts.
+ */
+function sanitizeWinAnsi(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2013\u2014]/g, '-')
+    .replace(/[\u2026]/g, '...')
+    .replace(/[^\x00-\x7F]/g, ''); // strip remaining non-ASCII characters
+}
+
+/**
  * Format byte sizes into human readable strings (KB, MB, GB)
  */
 export function formatBytes(bytes: number, decimals = 2): string {
@@ -242,7 +255,7 @@ export async function wordToPdf(
   const lineHeight = 16;
 
   for (let line of lines) {
-    line = line.trim();
+    line = sanitizeWinAnsi(line.trim());
     if (!line) {
       y -= lineHeight;
       continue;
@@ -422,8 +435,9 @@ export async function pptToPdf(
     const lines = slideContent.split('\n');
     let y = 430;
     for (const line of lines) {
-      if (!line.trim()) continue;
-      page.drawText(line.trim(), {
+      const cleanLine = sanitizeWinAnsi(line.trim());
+      if (!cleanLine) continue;
+      page.drawText(cleanLine, {
         x: 50,
         y,
         size: 14,
@@ -716,7 +730,7 @@ export async function mdToPdf(
   
   onProgress?.(40, 'Generating PDF pages...');
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const line = sanitizeWinAnsi(lines[i].trim());
     if (!line) {
       y -= 12; // Empty line space
       if (y < margin) {

@@ -34,7 +34,7 @@
     --accent-troll: #00e5ff;
     --accent-troll-hover: #33eaff;
   }
-  
+
   .light {
     --bg-main: #ffffff;
     --bg-card: #f9f9f9;
@@ -63,7 +63,9 @@
   }
 
   /* Smooth Theme Transitions */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     transition-property: background-color, border-color, color, fill, stroke, box-shadow;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
