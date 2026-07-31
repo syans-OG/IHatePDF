@@ -66,7 +66,7 @@ export function App() {
             {/* Category Filter Tabs */}
             <div className="flex items-center justify-start md:justify-center gap-2 overflow-x-auto pb-4 w-full snap-x">
               {[
-                { id: 'all', label: 'All Tools (10)', icon: Layers },
+                { id: 'all', label: 'All Tools (12)', icon: Layers },
                 { id: 'convert', label: 'Conversion', icon: Sparkles },
                 { id: 'edit', label: 'Edit & Merge', icon: Flame },
                 { id: 'troll', label: 'Special Edition', icon: Bomb },
