@@ -32,9 +32,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-[11px] text-text-muted font-medium">
-          <p>Made By Syans.</p>
-        </div>
       </div>
     </footer>
   );
